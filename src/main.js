@@ -1,7 +1,10 @@
-import './assets/main.css'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
 
-import { createApp } from 'vue'
-import App from './App.vue'
-import axios from 'axios'
-
-createApp(App).mount('#app')
+import "./assets/main.css"; // Подключаем стили, если нужно
+createApp(header).mount('#header')
+const app = createApp(App);
+app.use(router);
+app.mount("#app");
+createApp(footer).mount('#footer')

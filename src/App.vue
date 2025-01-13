@@ -1,11 +1,16 @@
-<script>
-
-</script>
-
 <template>
-  Test
+  <router-view />
 </template>
 
-<style scoped>
+<script>
+import header from './components/header.vue';
+export default {};
+</script>
 
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 </style>
