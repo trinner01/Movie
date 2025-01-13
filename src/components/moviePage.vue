@@ -3,8 +3,14 @@ import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import details from "../assets/detail.json";
 import data from "../assets/data.json";
+import Header from "../components/header.vue";
+import Footer from "../components/footer.vue";
 
 export default {
+  components: { 
+    Header, 
+    Footer 
+  },
   setup() {
     const route = useRoute();
     const movie = ref(null);
@@ -27,9 +33,7 @@ export default {
 </script>
 
 <template>
-  <head>
-    <title>Detail Page</title>
-  </head>
+  <Header />
   <main v-if="movie">
     <h1>{{ movie.name }}</h1>
     <img :src="movie.poster" :alt="movie.name" />
@@ -63,12 +67,14 @@ export default {
   <div v-else>
     <p>Фильм не найден</p>
   </div>
+  <Footer />
 </template>
 
 <style scoped>
 main {
   color: white;
   padding: 20px;
+  column-count: 2;
 }
 
 img {

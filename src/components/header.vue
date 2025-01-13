@@ -4,7 +4,7 @@
 
 <template>
   <header>
-    <h1 class="title">Test Task</h1>
+    <a href="/"><h1 class="title">Test Task</h1></a>
   </header>
 </template>
 

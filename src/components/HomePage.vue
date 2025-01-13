@@ -5,7 +5,10 @@ import Header from "../components/header.vue";
 import Footer from "../components/footer.vue";
 
 export default {
-  components: { Header, Footer },
+  components: {
+    Header,
+    Footer 
+  },
   setup() {
     const movies = ref([]);
 
@@ -24,7 +27,7 @@ export default {
   <div>
     <Header />
     <main>
-      <div class="movie-list">
+        <div class="movie-list">
         <div v-for="movie in movies" :key="movie.id" class="movie">
           <img class="movie-poster" :src="movie.poster" :alt="movie.name" />
           <h2 class="movie-name">
@@ -48,7 +51,7 @@ export default {
             <div class="duration">⏱ {{ movie.duration }}</div>
           </div>
         </div>
-      </div>
+    </div>
     </main>
     <Footer />
   </div>
@@ -56,6 +59,8 @@ export default {
 
 <style scoped>
 .movie-list {
+  padding-top: 30px;
+  padding-bottom: 30px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
@@ -63,41 +68,67 @@ export default {
 }
 
 .movie {
+  color: white;
+  position: relative;
   border: 1px solid #444;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 25px;
   background-color: #222;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   transition: 550ms;
+  height: 450px;
 }
+
 .movie-list .movie:hover{
-  transform: translateY(5);
+  transform: translate(-10px, -10px);
+  border: #6c39e5 solid;
 }
+
+.movie-description{
+  padding-bottom: 10px;
+}
+
 .movie-poster {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  height: 50%;
+  border-radius: 25px;
+  object-fit: cover;
 }
 
 .movie-info {
-  margin-top: 10px;
+  gap: 10px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 20px;
 }
 
-.rating {
-  padding: 5px;
-  border-radius: 4px;
+.rating{
+  padding: 4px;
+  border-radius: 20px;
   color: white;
   display: inline-block;
 }
 
 .genre,
 .duration {
+  border-radius: 20px;
   font-size: 0.9em;
+  display: inline-block;
+  padding: 4px;
+}
+.genre{
+  background: #2880f3;
+}
+.duration{
+  background: #7438f8;
+}
+
+@media (min-width: 1518){
+  .movie{
+    height: 550px;
+  }
 }
 
 @media (max-width: 1200px) {
