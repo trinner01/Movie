@@ -10,9 +10,20 @@
 
 <style scoped>
 *{
-    color: white;
-    background: #292c31;
-    margin: 0;
-    height: 100px;
+    font-family: 'helvetica';
+    padding: 0%;
+    margin: 0%;
+}
+header{
+  background: #292c31;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+.title{
+    font-weight: bolder;
+    padding-left: 25px;
+    text-decoration: none;
+    color: #fdfdfd;
 }
 </style>

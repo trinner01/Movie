@@ -35,33 +35,44 @@ export default {
 <template>
   <Header />
   <main v-if="movie">
-    <h1>{{ movie.name }}</h1>
-    <img :src="movie.poster" :alt="movie.name" />
-    <p>{{ movie.description }}</p>
     <div class="movie-info">
-      <p>Рейтинг: ☆ {{ movie.rating.toFixed(1) }}</p>
-      <p>Жанр: {{ movie.genre }}</p>
-      <p>Длительность: {{ movie.duration }}</p>
+    <h1>{{ movie.name }}</h1>
+    <img :src="movie.poster" :alt="movie.name"/> <br><br>
+    <div class="rating" :style="{
+                backgroundColor: movie.rating < 4.0
+                  ? '#eb160f'
+                  : movie.rating < 7.0
+                  ? '#752dff'
+                  : '#009e53',
+              }"
+            >
+              ☆ {{ movie.rating.toFixed(1) }}
     </div>
+    <div class="genre">🎞: {{ movie.genre }}</div>
+    <div class="duration">⏱ {{ movie.duration }}</div>
+    
+    
 
-    <!-- Если есть дополнительные данные, выводим их -->
-    <div v-if="movie.trivia || movie.actors">
-      <h2>Дополнительная информация</h2>
+    </div>
+    <div class="desc">
+            <h1>Description</h1>
+            <p>{{ movie.description }}</p>
+            <div v-if="movie.trivia || movie.actors">
       <div v-if="movie.trivia">
-        <h3>Интересные факты:</h3>
+        <h1>Trivia</h1>
         <ul>
           <li v-for="(fact, index) in movie.trivia" :key="index">{{ fact }}</li>
         </ul>
       </div>
       <div v-if="movie.actors">
-        <h3>Актёры:</h3>
+        <h1>Actors</h1>
         <ul>
           <li v-for="actor in movie.actors" :key="actor.imdb_id">
-            {{ actor.name }} 
-            <a :href="`https://www.imdb.com/name/${actor.imdb_id}`" target="_blank">(IMDB)</a>
+            <a :href="`https://www.imdb.com/name/${actor.imdb_id}`" target="_blank">{{ actor.name }} </a>
           </li>
         </ul>
       </div>
+    </div>
     </div>
   </main>
   <div v-else>
@@ -72,18 +83,49 @@ export default {
 
 <style scoped>
 main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   color: white;
+  font-weight: bolder;
   padding: 20px;
-  column-count: 2;
+  height: 720px;
+  align-items: flex-start;
 }
 
 img {
-  max-width: 100%;
-  border-radius: 8px;
+  border-radius: 10px;
+  max-height: 500px;
+  object-fit: cover;
 }
 
-.movie-info {
-  margin-top: 20px;
-  font-size: 1.2em;
+.rating, .genre, .duration{
+  padding: 4px;
+  border-radius: 20px;
+  color: white;
+  display: inline-block;
+  font-size: 0.8em;
+  margin: 2px;
+  width: max-content;
+  text-align: center;
+}
+.genre{
+  background: #2880f3;
+}
+.duration{
+  background: #7438f8;
+}
+a{
+  text-decoration: underline;
+}
+.desc{
+    margin-top: 10px;
+    flex: 1;
+    max-width: 800px;
+    padding-left: 100px;
+}
+footer{
+  padding: 0;
+  margin: 0;
 }
 </style>

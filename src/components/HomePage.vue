@@ -1,34 +1,16 @@
-<script>
-import { ref, onMounted } from "vue";
-import data from "../assets/data.json";
-import Header from "../components/header.vue";
-import Footer from "../components/footer.vue";
-
-export default {
-  components: {
-    Header,
-    Footer 
-  },
-  setup() {
-    const movies = ref([]);
-
-    onMounted(() => {
-      movies.value = data.items; // Загружаем фильмы из data.json
-    });
-
-    return {
-      movies,
-    };
-  },
-};
-</script>
-
 <template>
   <div>
     <Header />
     <main>
-        <div class="movie-list">
-        <div v-for="movie in movies" :key="movie.id" class="movie">
+      <div class="movie-list">
+        <div
+          v-for="movie in movies"
+          :key="movie.id"
+          class="movie"
+          @mouseenter="setActive(movie.id)"
+          @mouseleave="removeActive(movie.id)"
+          :class="{ active: activeMovies.includes(movie.id) }"
+        >
           <img class="movie-poster" :src="movie.poster" :alt="movie.name" />
           <h2 class="movie-name">
             <router-link :to="`/movie/${movie.id}`">{{ movie.name }}</router-link>
@@ -51,11 +33,57 @@ export default {
             <div class="duration">⏱ {{ movie.duration }}</div>
           </div>
         </div>
-    </div>
+      </div>
     </main>
     <Footer />
   </div>
 </template>
+
+<script>
+import { ref, onMounted } from "vue";
+import data from "../assets/data.json";
+import Header from "../components/header.vue";
+import Footer from "../components/footer.vue";
+
+export default {
+  components: {
+    Header,
+    Footer,
+  },
+  setup() {
+    const movies = ref([]);
+    const activeMovies = ref([]);
+
+    const setActive = (id) => {
+      if (!activeMovies.value.includes(id)) {
+        activeMovies.value.push(id);
+      }
+    };
+
+    const removeActive = (id) => {
+      setTimeout(() => {
+        const index = activeMovies.value.indexOf(id);
+        if (index !== -1) {
+          activeMovies.value.splice(index, 1);
+        }
+      }, none); // Задержка для завершения анимации
+    };
+
+    onMounted(() => {
+      movies.value = data.items; // Загружаем фильмы из data.json
+    });
+
+    return {
+      movies,
+      activeMovies,
+      setActive,
+      removeActive,
+    };
+  },
+};
+</script>
+
+
 
 <style scoped>
 .movie-list {
@@ -68,21 +96,30 @@ export default {
 }
 
 .movie {
-  color: white;
+  padding: 10px;
   position: relative;
   border: 1px solid #444;
-  padding: 10px;
   border-radius: 25px;
-  background-color: #222;
+  background-color: #121212;
   display: flex;
   flex-direction: column;
-  transition: 550ms;
   height: 450px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  z-index: 10; /* Гарантируем, что карточка выше всего */
+  overflow: hidden; /* Скрываем всё, что выходит за пределы карточки */
 }
 
-.movie-list .movie:hover{
+.movie:hover {
   transform: translate(-10px, -10px);
-  border: #6c39e5 solid;
+  box-shadow: 10px 10px 0 0 #6c39e5;
+}
+
+.movie:hover {
+  transform: translate(-10px, -10px);
+}
+
+.movie.active {
+  border: 3px solid #6c39e5;
 }
 
 .movie-description{
