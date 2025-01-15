@@ -18,13 +18,18 @@ export default {
     onMounted(() => {
       const movieId = parseInt(route.params.id);
 
-      // Сначала ищем фильм в detail.json
-      movie.value = details.find((item) => item.id === movieId);
+        // Сначала ищем фильм в detail.json
+        movie.value = details.find((item) => item.id === movieId);
 
-      // Если фильма нет в detail.json, ищем его в data.json
-      if (!movie.value) {
-        movie.value = data.items.find((item) => item.id === movieId);
-      }
+        // Если фильма нет в detail.json, ищем его в data.json
+        if (!movie.value) {
+          movie.value = data.items.find((item) => item.id === movieId);
+        }
+
+        // Устанавливаем заголовок страницы с названием фильма
+        if (movie.value) {
+          document.title = `Detail Page`;
+        }
     });
 
     return { movie };
