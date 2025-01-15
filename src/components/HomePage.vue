@@ -103,7 +103,7 @@ export default {
   background-color: #121212;
   display: flex;
   flex-direction: column;
-  height: 450px;
+  height: 500px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   z-index: 10; /* Гарантируем, что карточка выше всего */
   overflow: hidden; /* Скрываем всё, что выходит за пределы карточки */

@@ -89,15 +89,17 @@ main {
   color: white;
   font-weight: bolder;
   padding: 20px;
-  height: 720px;
+  padding-left: 50px;
   align-items: flex-start;
+  min-height: 77.7vh
 }
 
 img {
   border-radius: 10px;
-  max-height: 500px;
+  height: 400px;
   object-fit: cover;
 }
+
 
 .rating, .genre, .duration{
   padding: 4px;
@@ -122,10 +124,11 @@ a{
     margin-top: 10px;
     flex: 1;
     max-width: 800px;
-    padding-left: 100px;
+    padding-left: 50px;
 }
-footer{
-  padding: 0;
-  margin: 0;
+footer {
+  background: #292c31;
+  height: 70px;
+  margin-top: auto;
 }
 </style>
